@@ -31,6 +31,8 @@
 
 # "temporary" build files
 /target
-
 /*.idea
-
+*.iml
+.project
+.classpath
+node_modules
