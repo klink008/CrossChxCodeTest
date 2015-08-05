@@ -10,7 +10,8 @@ var paths = {
               'src/main/javascripts/**/*.js'],
     dependencies: ['node_modules/angular/angular.js',
                    'node_modules/restangular/src/restangular.js',
-                   'node_modules/underscore/underscore.js'],
+                   'node_modules/underscore/underscore.js',
+                   'node_modules/d3/d3.js'],
     html: ['src/main/templates/*.html',
            'src/main/templates/**/*.html'],
     dest: ['web-app/js',
@@ -31,7 +32,10 @@ gulp.task('build', function(){
     gulp.src(['build/templates.js','src/main/javascripts/*.js'])
         .pipe(concat('railroadRoute.js'))
         .pipe(gulp.dest(paths.dest[1]));
-    gulp.src(['node_modules/angular/angular.js','node_modules/underscore/underscore.js', 'node_modules/restangular/src/restangular.js'])
+    gulp.src(['node_modules/angular/angular.js',
+        'node_modules/underscore/underscore.js',
+        'node_modules/restangular/src/restangular.js',
+        'node_modules/d3/d3.js'])
         .pipe(concat('dependencies.js'))
         .pipe(gulp.dest(paths.dest[1]))
 });
