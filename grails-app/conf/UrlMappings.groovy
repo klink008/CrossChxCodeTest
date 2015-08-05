@@ -9,5 +9,8 @@ class UrlMappings {
 
         "/"(view:"/index")
         "500"(view:'/error')
+
+//        "/retrieveRoutes"(controller:"routes", action:[GET:"list"])
+        "/retrieveRoutes"(resource: 'routes')
 	}
 }

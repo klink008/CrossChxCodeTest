@@ -1,0 +1,23 @@
+{
+    "nodes":[
+        {"baseLocation":"Frolia","connectingLocation":"Hailea", "distance":9},
+        {"baseLocation":"Hailea","connectingLocation":"Hanalei", "distance":5},
+        {"baseLocation":"Hanalei","connectingLocation":"Maeulia", "distance":6},
+        {"baseLocation":"Hauauai","connectingLocation":"Lainea", "distance":8},
+        {"baseLocation":"Kaleola","connectingLocation":"Maeulia", "distance":7},
+        {"baseLocation":"Lainea","connectingLocation":"Hailea", "distance":5},
+        {"baseLocation":"Lakua","connectingLocation":"Hauauai", "distance":3},
+        {"baseLocation":"Maeulia","connectingLocation":"Hailea", "distance":12},
+        {"baseLocation":"Paukaa","connectingLocation":"Hauauai", "distance":6},
+        {"baseLocation":"Poipu","connectingLocation":"Paukaa", "distance":9},
+        {"baseLocation":"Hailea","connectingLocation":"Waimea", "distance":4},
+        {"baseLocation":"Waimea","connectingLocation":"Lakua", "distance":9},
+        {"baseLocation":"Lakua","connectingLocation":"Poipu", "distance":7},
+        {"baseLocation":"Waimea","connectingLocation":"Kaleola", "distance":4},
+        {"baseLocation":"Maeulia","connectingLocation":"Paukaa", "distance":14},
+        {"baseLocation":"Hailea","connectingLocation":"Lainea", "distance":8}
+    ],
+    "links":[
+
+    ]
+}
