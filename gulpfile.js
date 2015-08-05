@@ -6,11 +6,17 @@ var html2js = require('gulp-html2js');
 var karma = require('karma').Server;
 
 var paths = {
-    scripts: ['src/main/javascripts/*.js', 'src/main/javascripts/**/*.js'],
-    dependencies: ['node_modules/angular/angular.js'],
-    html: ['src/main/templates/*.html', 'src/main/templates/**/*.html'],
-    dest: ['web-app/js', 'build'],
-    clean: ['web-app/js/*.js', 'build/*.js']
+    scripts: ['src/main/javascripts/*.js',
+              'src/main/javascripts/**/*.js'],
+    dependencies: ['node_modules/angular/angular.js',
+                   'node_modules/restangular/src/restangular.js',
+                   'node_modules/underscore/underscore.js'],
+    html: ['src/main/templates/*.html',
+           'src/main/templates/**/*.html'],
+    dest: ['web-app/js',
+           'build'],
+    clean: ['web-app/js/*.js',
+            'build/*.js']
 };
 
 //ToDo: Doesn't seem to like relative paths. Using direct path for now.
@@ -25,14 +31,17 @@ gulp.task('build', function(){
     gulp.src(['build/templates.js','src/main/javascripts/*.js'])
         .pipe(concat('railroadRoute.js'))
         .pipe(gulp.dest(paths.dest[1]));
-    gulp.src(paths.dependencies)
+    gulp.src(['node_modules/angular/angular.js','node_modules/underscore/underscore.js', 'node_modules/restangular/src/restangular.js'])
         .pipe(concat('dependencies.js'))
         .pipe(gulp.dest(paths.dest[1]))
 });
 
 gulp.task('template', function(){
    gulp.src(paths.html)
-       .pipe(html2js())
+       .pipe(html2js({
+           outputModuleName: 'templates-main',
+           useStrict: true
+       }))
        .pipe(concat('templates.js'))
        .pipe(gulp.dest('build'))
 });

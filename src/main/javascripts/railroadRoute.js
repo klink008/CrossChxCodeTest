@@ -1,1 +1,1 @@
-var railroadRoute = angular.module('railroadRoute', ['restangular']);
+var railroadRoute = angular.module('railroadRoute', ['restangular','templates-main']);
