@@ -1,5 +1,64 @@
 var gulp = require('gulp');
+var clean = require('gulp-clean');
+var concat = require('gulp-concat');
+var ngAnnotate = require('gulp-ng-annotate');
+var html2js = require('gulp-html2js');
+var karma = require('karma').Server;
 
-gulp.task('default', function() {
-    // place code for your default task here
+var paths = {
+    scripts: ['src/main/javascripts/*.js', 'src/main/javascripts/**/*.js'],
+    dependencies: ['node_modules/angular/angular.js'],
+    html: ['src/main/templates/*.html', 'src/main/templates/**/*.html'],
+    dest: ['web-app/js', 'build'],
+    clean: ['web-app/js/*.js', 'build/*.js']
+};
+
+//ToDo: Doesn't seem to like relative paths. Using direct path for now.
+gulp.task('test', function(done) {
+    new karma({
+        configFile: 'C:/workspace/CrossChxCodeTest/test/Javascript/karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
+
+gulp.task('build', function(){
+    gulp.src(['build/templates.js','src/main/javascripts/*.js'])
+        .pipe(concat('railroadRoute.js'))
+        .pipe(gulp.dest(paths.dest[1]));
+    gulp.src(paths.dependencies)
+        .pipe(concat('dependencies.js'))
+        .pipe(gulp.dest(paths.dest[1]))
+});
+
+gulp.task('template', function(){
+   gulp.src(paths.html)
+       .pipe(html2js())
+       .pipe(concat('templates.js'))
+       .pipe(gulp.dest('build'))
+});
+
+gulp.task('annotate', function(){
+    gulp.src('build/railroadRoute.js')
+        .pipe(ngAnnotate())
+        .pipe(gulp.dest(paths.dest[0]));
+    gulp.src('build/dependencies.js')
+        .pipe(ngAnnotate())
+        .pipe(gulp.dest(paths.dest[0]))
+});
+
+gulp.task('clean', function(){
+    gulp.src(paths.clean[0])
+        .pipe(clean());
+    gulp.src(paths.clean[1])
+        .pipe(clean());
+});
+
+gulp.task('copy', function(){
+    gulp.src('build/dependencies.js')
+        .pipe(gulp.dest(paths.dest[0]));
+    gulp.src('build/railroadRoute.js')
+        .pipe(gulp.dest(paths.dest[0]));
+});
+
+
+gulp.task('default', ['template', 'build', 'annotate', 'copy']);
