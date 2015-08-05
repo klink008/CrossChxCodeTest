@@ -1,13 +1,7 @@
 function RailroadRouteController($scope, railroadRouteService){
-    var railroadRouteCtrl = $scope;
     var _this = this;
 
-    this.initializeRouteLinks = function(){
-        railroadRouteService.retrieveRoutes().then(function(){
-
-        })
-    };
-
+//------------------------SCOPE VARIABLES---------------------------------
     this.width = 960;
     this.height = 500;
 
@@ -22,6 +16,26 @@ function RailroadRouteController($scope, railroadRouteService){
         .attr("width", _this.width)
         .attr("height", _this.height);
 
+//------------------------LOCAL VARIABLES---------------------------------
+
+//------------------------SCOPE FUNCTIONS---------------------------------
+    this.initialize = function(){
+        retrieveRouteNodes();
+        retrieveRouteLinks();
+    };
+
+//------------------------LOCAL FUNCTIONS---------------------------------
+    function retrieveRouteNodes(){
+        railroadRouteService.retrieveRouteNodes().then(function(data){
+            _this.nodes = data;
+        })
+    }
+
+    function retrieveRouteLinks(){
+        railroadRouteService.retrieveRouteLinks().then(function(data){
+            _this.links = data;
+        })
+    }
 
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);

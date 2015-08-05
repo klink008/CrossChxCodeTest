@@ -10,7 +10,7 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
 
-//        "/retrieveRoutes"(controller:"routes", action:[GET:"list"])
-        "/retrieveRoutes"(resource: 'routes')
+        "/retrieveRouteNodes"(controller:"nodes", action:[GET:"retrieveNodes"])
+        "/retrieveRouteLinks"(controller:"links", action:[GET:"retrieveLinks"])
 	}
 }

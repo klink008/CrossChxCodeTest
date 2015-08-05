@@ -7,7 +7,7 @@ var RailroadRouteDirective = function(){
         controller: RailroadRouteController,
         controllerAs: 'railroadRouteCtrl',
         link: function(scope,elem,attrs){
-            scope.railroadRouteCtrl.initializeRouteLinks();
+            scope.railroadRouteCtrl.initialize();
 //            d3.json("trainRoutes.json", function(error, graph) {
 //                if (error) throw error;
 //
