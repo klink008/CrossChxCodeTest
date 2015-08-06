@@ -1,8 +1,5 @@
 import grails.converters.JSON
 
-/**
- * Created by Kellen on 8/5/2015.
- */
 class LinksController {
     def linksService
 

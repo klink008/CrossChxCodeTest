@@ -5,8 +5,8 @@ class NodesController {
 
     def retrieveNodes(){
         try{
-            def routes = nodesService.retrieveNodes()
-            render routes as JSON
+            def nodes = nodesService.retrieveNodes()
+            render nodes as JSON
         } catch (err){
             render (status: 500, text: err.toString())
         }

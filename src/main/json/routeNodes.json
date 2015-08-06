@@ -1,37 +1,48 @@
 {
     "nodes": [
         {
-            "location": "Frolia"
+            "name": "Frolia",
+            "group": 1
         },
         {
-            "location": "Hailea"
+            "name": "Hailea",
+            "group": 2
         },
         {
-            "location": "Hanalei"
+            "name": "Hanalei",
+            "group": 3
         },
         {
-            "location": "Hauauai"
+            "name": "Hauauai",
+            "group": 4
         },
         {
-            "location": "Kaleola"
+            "name": "Kaleola",
+            "group": 5
         },
         {
-            "location": "Lainea"
+            "name": "Lainea",
+            "group": 6
         },
         {
-            "location": "Lakua"
+            "name": "Lakua",
+            "group": 7
         },
         {
-            "location": "Maeulia"
+            "name": "Maeulia",
+            "group": 8
         },
         {
-            "location": "Paukaa"
+            "name": "Paukaa",
+            "group": 9
         },
         {
-            "location": "Poipu"
+            "name": "Poipu",
+            "group": 10
         },
         {
-            "location": "Waimea"
+            "name": "Waimea",
+            "group": 11
         }
     ]
 }
