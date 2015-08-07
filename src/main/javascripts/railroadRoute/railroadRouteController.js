@@ -88,7 +88,7 @@ var selectedNodes = [];
             .enter().append("circle")
             .attr("class", "node")
             .attr("r", 5)
-            .style("fill", "grey")
+            .style("fill", "rgb(128, 128, 128)")
             .on('click', singleClick);
 
         node.append("title")
@@ -119,11 +119,15 @@ var selectedNodes = [];
         });
 
         function singleClick(){
-            if(selectedNodes < 2) {
-                d3.select(this).attr('r', 5)
-                    .style("fill", "yellow")
-                    .style("stroke", "FFFA0E");
+            var currentColor = d3.select(this).attr("style").slice(6,d3.select(this).attr("style").length-1);
+            if(currentColor == "rgb(128, 128, 128)" && selectedNodes < 2){
+                d3.select(this).attr('r', 7)
+                    .style("fill", "yellow");
                 selectedNodes++;
+            } else if(currentColor == "rgb(255, 255, 0)" && currentColor != "rgb(128, 128, 128)"){
+                d3.select(this).attr('r', 5)
+                    .style("fill", "rgb(128, 128, 128)");
+                selectedNodes--;
             }
         }
     }
