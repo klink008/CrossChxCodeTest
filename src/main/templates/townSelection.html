@@ -1,7 +1,9 @@
 <div class="vertical-container ">
-    <div class="town-container" ng-repeat="node in nodes">
+    <div class="town-container" ng-repeat="node in nodes track by $index">
         <span>
-            <input type="checkbox" ng-model="townSelectionCtrl.townsSelected">
+            <input ng-disabled="townSelectionCtrl.isMoreThanTwoSelected($index)"
+                   type="checkbox"
+                   ng-model="townSelectionCtrl.townsSelected[$index]">
         </span>
         <div class="towns">{{node.name}}</div><br>
     </div>

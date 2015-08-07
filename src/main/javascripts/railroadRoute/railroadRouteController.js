@@ -44,14 +44,27 @@ function RailroadRouteController($scope, railroadRouteService, $q){
             .attr("preserveAspectRatio", "xMidYMid meet")
             .attr("height", "100%")
             .attr("width", "100%");
-//            .attr("path", "d='M5,50 l0,100 l100,0 l0,-100 l-100,0 M215,100 a50,50 0 1 1 -100,0 50,50 0 1 1 100,0 M265,50 l50,100 l-100,0 l50,-100z'")
-//            .attr("fill", "'url(#img1)'");
 
-        var img = new Image();
-        img.src = imageUrl;
-
-        svg.append('image')
-        .attr("xlink:href", imageUrl);
+//        This code links and displays an island image that I wanted to use as a background image for the force layout
+//        but ran out of time trying to get it to scale with the layout.
+//
+//        var defs = svg.append('svg:defs');
+//
+//        defs.append('svg:pattern')
+//            .attr("id", "island")
+//            .attr('patternUnits', 'userSpaceOnUse')
+//            .attr('width', '595')
+//            .attr('height', '638')
+//            .append('svg:image')
+//            .attr("xlink:href", imageUrl)
+//            .attr('x', -100)
+//            .attr('y', -120)
+//            .attr('width', 595)
+//            .attr('height', 638);
+//
+//        svg.append('svg:path')
+//            .attr('d', "M0 0 v0 500 h500 500 V500 0 H0 0 z")
+//            .attr('fill', "url(#island)");
 
         var force = d3.layout.force()
             .charge(-120)
@@ -107,7 +120,6 @@ function RailroadRouteController($scope, railroadRouteService, $q){
                     return d.y;
                 });
         });
-
     }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);
