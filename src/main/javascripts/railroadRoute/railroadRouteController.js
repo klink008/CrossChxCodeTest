@@ -33,6 +33,7 @@ function RailroadRouteController($scope, railroadRouteService, $q){
     }
 
     function createForceGraph(nodes, links){
+        var imageUrl = window.grailsSupport.islandUrl;
         var height = 250,
             width = 250;
 
@@ -43,6 +44,14 @@ function RailroadRouteController($scope, railroadRouteService, $q){
             .attr("preserveAspectRatio", "xMidYMid meet")
             .attr("height", "100%")
             .attr("width", "100%");
+//            .attr("path", "d='M5,50 l0,100 l100,0 l0,-100 l-100,0 M215,100 a50,50 0 1 1 -100,0 50,50 0 1 1 100,0 M265,50 l50,100 l-100,0 l50,-100z'")
+//            .attr("fill", "'url(#img1)'");
+
+        var img = new Image();
+        img.src = imageUrl;
+
+        svg.append('image')
+        .attr("xlink:href", imageUrl);
 
         var force = d3.layout.force()
             .charge(-120)
