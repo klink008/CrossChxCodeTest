@@ -25,11 +25,12 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"vertical-container \">\n" +
     "    <div class=\"town-container\" ng-repeat=\"node in nodes track by $index\">\n" +
     "        <span>\n" +
-    "            <input ng-disabled=\"townSelectionCtrl.isMoreThanTwoSelected($index)\"\n" +
+    "            <input ng-disabled=\"!node.selected && townSelectionCtrl.isMoreThanTwoSelected()\"\n" +
     "                   type=\"checkbox\"\n" +
-    "                   ng-model=\"townSelectionCtrl.townsSelected[$index]\"\n" +
-    "                   ng-click=\"townSelectionCtrl.selectNode($index)\">\n" +
+    "                   ng-model=\"node.selected\"\n" +
+    "                   ng-click=\"townSelectionCtrl.highlightNode($index)\">\n" +
     "        </span>\n" +
+    "        {{node.selected}}\n" +
     "        <div class=\"towns\">{{node.name}}</div><br>\n" +
     "    </div>\n" +
     "</div>\n" +

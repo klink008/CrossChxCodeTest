@@ -1,26 +1,20 @@
 var TownSelectionController = function($scope){
     var _this = this;
 
-    _.each($scope.nodes, function(node){
-        if(node.selected){
-            _this.townsSelected.push(true)
-        } else {
-            _this.townsSelected.push(false)
-        }
-    });
+    _this.townsSelected = 0;
 
-    this.isMoreThanTwoSelected = function(index){
+    this.isMoreThanTwoSelected = function(){
         var numberOfTownsSelected = 0;
-            _.each(_this.townsSelected, function(town){
-            if(town){
+            _.each($scope.nodes, function(town){
+            if(town.selected){
                 numberOfTownsSelected++;
             }
         });
 
-        return numberOfTownsSelected >= 2 && !_this.townsSelected[index]
+        return numberOfTownsSelected >= 2;
     };
 
-    this.selectNode = function(index){
+    this.highlightNode = function(index){
         d3.select("#force-layout").selectAll(".node").each(function(d,i){
             if(d.name == $scope.nodes[index].name){
                 var currentColor = d3.select(this).attr("style").slice(6,d3.select(this).attr("style").length-1);

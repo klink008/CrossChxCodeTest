@@ -1,4 +1,4 @@
-function RailroadRouteController($scope, railroadRouteService, $q){
+function RailroadRouteController($scope, railroadRouteService){
     var _this = this;
 
 //------------------------SCOPE VARIABLES---------------------------------
@@ -14,7 +14,7 @@ var selectedNodes = [];
                 _this.nodes = [];
                 _this.links = [];
                 _.each(nodeResponse, function(node){
-                    _this.nodes.push({name: node.name, group: node.group})
+                    _this.nodes.push({name: node.name, group: node.group, selected: false})
                 });
                 _.each(linkResponse, function(link){
                     _this.links.push({source: link.source, target: link.target, value: link.value})
@@ -124,22 +124,24 @@ var selectedNodes = [];
         if(currentColor == "rgb(128, 128, 128)" && selectedNodes < 2){
             d3.select(this).attr('r', 7)
                 .style("fill", "yellow");
-            selectCheckbox(d3.select(this));
+            selectCheckbox(d3.select(this), true);
             selectedNodes++;
         } else if(currentColor == "rgb(255, 255, 0)" && currentColor != "rgb(128, 128, 128)"){
             d3.select(this).attr('r', 5)
                 .style("fill", "rgb(128, 128, 128)");
+            selectCheckbox(d3.select(this), false);
             selectedNodes--;
         }
     }
 
-    function selectCheckbox(selectedNode){
+    function selectCheckbox(selectedNode, value){
         var nodeIndex = _.findIndex(_this.nodes, function(node,index){
             if(node.name == selectedNode.datum().name){
                 return index
             }
         });
-        _this.nodes[nodeIndex].selected = true;
+        _this.nodes[nodeIndex].selected = value;
+        $scope.$apply();
     }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);

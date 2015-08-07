@@ -2,7 +2,7 @@ var TownSelectionDirective = function(){
     return {
         restrict: 'E',
         scope: {
-            nodes:'=nodes'
+            nodes:'='
         },
         templateUrl: 'src/main/templates/townSelection.html',
         controller: TownSelectionController,

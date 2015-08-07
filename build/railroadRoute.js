@@ -25,11 +25,12 @@ module.run(["$templateCache", function($templateCache) {
     "<div class=\"vertical-container \">\n" +
     "    <div class=\"town-container\" ng-repeat=\"node in nodes track by $index\">\n" +
     "        <span>\n" +
-    "            <input ng-disabled=\"townSelectionCtrl.isMoreThanTwoSelected($index)\"\n" +
+    "            <input ng-disabled=\"!node.selected && townSelectionCtrl.isMoreThanTwoSelected()\"\n" +
     "                   type=\"checkbox\"\n" +
-    "                   ng-model=\"townSelectionCtrl.townsSelected[$index]\"\n" +
-    "                   ng-click=\"townSelectionCtrl.selectNode($index)\">\n" +
+    "                   ng-model=\"node.selected\"\n" +
+    "                   ng-click=\"townSelectionCtrl.highlightNode($index)\">\n" +
     "        </span>\n" +
+    "        {{node.selected}}\n" +
     "        <div class=\"towns\">{{node.name}}</div><br>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -38,7 +39,7 @@ module.run(["$templateCache", function($templateCache) {
 })();
 
 var railroadRoute = angular.module('railroadRoute', ['restangular','templates-main']);
-function RailroadRouteController($scope, railroadRouteService, $q){
+function RailroadRouteController($scope, railroadRouteService){
     var _this = this;
 
 //------------------------SCOPE VARIABLES---------------------------------
@@ -54,7 +55,7 @@ var selectedNodes = [];
                 _this.nodes = [];
                 _this.links = [];
                 _.each(nodeResponse, function(node){
-                    _this.nodes.push({name: node.name, group: node.group})
+                    _this.nodes.push({name: node.name, group: node.group, selected: false})
                 });
                 _.each(linkResponse, function(link){
                     _this.links.push({source: link.source, target: link.target, value: link.value})
@@ -164,22 +165,24 @@ var selectedNodes = [];
         if(currentColor == "rgb(128, 128, 128)" && selectedNodes < 2){
             d3.select(this).attr('r', 7)
                 .style("fill", "yellow");
-            selectCheckbox(d3.select(this));
+            selectCheckbox(d3.select(this), true);
             selectedNodes++;
         } else if(currentColor == "rgb(255, 255, 0)" && currentColor != "rgb(128, 128, 128)"){
             d3.select(this).attr('r', 5)
                 .style("fill", "rgb(128, 128, 128)");
+            selectCheckbox(d3.select(this), false);
             selectedNodes--;
         }
     }
 
-    function selectCheckbox(selectedNode){
+    function selectCheckbox(selectedNode, value){
         var nodeIndex = _.findIndex(_this.nodes, function(node,index){
             if(node.name == selectedNode.datum().name){
                 return index
             }
         });
-        _this.nodes[nodeIndex].selected = true;
+        _this.nodes[nodeIndex].selected = value;
+        $scope.$apply();
     }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);
@@ -212,26 +215,20 @@ railroadRoute.service('railroadRouteService', RailroadRouteService);
 var TownSelectionController = function($scope){
     var _this = this;
 
-    _.each($scope.nodes, function(node){
-        if(node.selected){
-            _this.townsSelected.push(true)
-        } else {
-            _this.townsSelected.push(false)
-        }
-    });
+    _this.townsSelected = 0;
 
-    this.isMoreThanTwoSelected = function(index){
+    this.isMoreThanTwoSelected = function(){
         var numberOfTownsSelected = 0;
-            _.each(_this.townsSelected, function(town){
-            if(town){
+            _.each($scope.nodes, function(town){
+            if(town.selected){
                 numberOfTownsSelected++;
             }
         });
 
-        return numberOfTownsSelected >= 2 && !_this.townsSelected[index]
+        return numberOfTownsSelected >= 2;
     };
 
-    this.selectNode = function(index){
+    this.highlightNode = function(index){
         d3.select("#force-layout").selectAll(".node").each(function(d,i){
             if(d.name == $scope.nodes[index].name){
                 var currentColor = d3.select(this).attr("style").slice(6,d3.select(this).attr("style").length-1);
@@ -251,7 +248,7 @@ var TownSelectionDirective = function(){
     return {
         restrict: 'E',
         scope: {
-            nodes:'=nodes'
+            nodes:'='
         },
         templateUrl: 'src/main/templates/townSelection.html',
         controller: TownSelectionController,
