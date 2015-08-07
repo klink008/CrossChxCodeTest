@@ -16,6 +16,7 @@
 .vertical-container{
     display: flex;
     flex-direction: column;
+    height: 100%
 }
 
 .horizontal-container{
@@ -33,17 +34,30 @@
     flex-grow: 1;
     flex-basis: 25%;
     background-color: lightcoral;
+    max-width: 200px;
+    height: 100%;
 }
 
 .header{
     background-color: peachpuff;
     height: 50px;
+    text-align: center;
+    line-height: 45px;
+    color: mediumaquamarine;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.town-container{
+    display: flex;
+    flex-grow: 1;
 }
 
 .towns{
     color: white;
     font-size: 25px;
     font-weight: bold;
-    text-align: right;
+    text-align: left;
     padding-right: 30px;
+    padding-left: 5px;
 }

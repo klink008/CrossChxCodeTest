@@ -69,8 +69,8 @@ function RailroadRouteController($scope, railroadRouteService, $q){
             .attr("r", 5)
             .style("fill", function (d) {
                 return color(d.group);
-            })
-            .call(force.drag);
+            });
+//            .call(force.drag);
 
         node.append("title")
             .text(function (d) {
