@@ -3,7 +3,8 @@
         <span>
             <input ng-disabled="townSelectionCtrl.isMoreThanTwoSelected($index)"
                    type="checkbox"
-                   ng-model="townSelectionCtrl.townsSelected[$index]">
+                   ng-model="townSelectionCtrl.townsSelected[$index]"
+                   ng-click="townSelectionCtrl.selectNode($index)">
         </span>
         <div class="towns">{{node.name}}</div><br>
     </div>

@@ -117,19 +117,29 @@ var selectedNodes = [];
                     return d.y;
                 });
         });
+    }
 
-        function singleClick(){
-            var currentColor = d3.select(this).attr("style").slice(6,d3.select(this).attr("style").length-1);
-            if(currentColor == "rgb(128, 128, 128)" && selectedNodes < 2){
-                d3.select(this).attr('r', 7)
-                    .style("fill", "yellow");
-                selectedNodes++;
-            } else if(currentColor == "rgb(255, 255, 0)" && currentColor != "rgb(128, 128, 128)"){
-                d3.select(this).attr('r', 5)
-                    .style("fill", "rgb(128, 128, 128)");
-                selectedNodes--;
-            }
+    function singleClick(){
+        var currentColor = d3.select(this).attr("style").slice(6,d3.select(this).attr("style").length-1);
+        if(currentColor == "rgb(128, 128, 128)" && selectedNodes < 2){
+            d3.select(this).attr('r', 7)
+                .style("fill", "yellow");
+            selectCheckbox(d3.select(this));
+            selectedNodes++;
+        } else if(currentColor == "rgb(255, 255, 0)" && currentColor != "rgb(128, 128, 128)"){
+            d3.select(this).attr('r', 5)
+                .style("fill", "rgb(128, 128, 128)");
+            selectedNodes--;
         }
+    }
+
+    function selectCheckbox(selectedNode){
+        var nodeIndex = _.findIndex(_this.nodes, function(node,index){
+            if(node.name == selectedNode.datum().name){
+                return index
+            }
+        });
+        _this.nodes[nodeIndex].selected = true;
     }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);
