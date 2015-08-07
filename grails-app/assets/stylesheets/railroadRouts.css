@@ -8,6 +8,12 @@
     stroke-opacity: .6;
 }
 
+.text {
+    fill: #000;
+    font: 10px sans-serif;
+    pointer-events: none;
+}
+
 .body{
     margin: 0;
     overflow-y: hidden;
@@ -51,6 +57,7 @@
 .town-container{
     display: flex;
     flex-grow: 1;
+
 }
 
 .towns{

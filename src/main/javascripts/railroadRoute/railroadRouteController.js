@@ -5,6 +5,7 @@ function RailroadRouteController($scope, railroadRouteService, $q){
 
 
 //------------------------LOCAL VARIABLES---------------------------------
+var selectedNodes = [];
 
 //------------------------SCOPE FUNCTIONS---------------------------------
     this.initialize = function(){
@@ -33,11 +34,9 @@ function RailroadRouteController($scope, railroadRouteService, $q){
     }
 
     function createForceGraph(nodes, links){
-        var imageUrl = window.grailsSupport.islandUrl;
+//        var imageUrl = window.grailsSupport.islandUrl;
         var height = 250,
             width = 250;
-
-        var color = d3.scale.category20b();
 
         var svg = d3.select("#force-layout").append("svg:svg")
             .attr("viewBox", "0 0 " + width + " " + height )
@@ -89,10 +88,8 @@ function RailroadRouteController($scope, railroadRouteService, $q){
             .enter().append("circle")
             .attr("class", "node")
             .attr("r", 5)
-            .style("fill", function (d) {
-                return color(d.group);
-            });
-//            .call(force.drag);
+            .style("fill", "grey")
+            .on('click', singleClick);
 
         node.append("title")
             .text(function (d) {
@@ -120,6 +117,15 @@ function RailroadRouteController($scope, railroadRouteService, $q){
                     return d.y;
                 });
         });
+
+        function singleClick(){
+            if(selectedNodes < 2) {
+                d3.select(this).attr('r', 5)
+                    .style("fill", "yellow")
+                    .style("stroke", "FFFA0E");
+                selectedNodes++;
+            }
+        }
     }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);
