@@ -30,7 +30,6 @@ module.run(["$templateCache", function($templateCache) {
     "                   ng-model=\"node.selected\"\n" +
     "                   ng-click=\"townSelectionCtrl.highlightNode($index)\">\n" +
     "        </span>\n" +
-    "        {{node.selected}}\n" +
     "        <div class=\"towns\">{{node.name}}</div><br>\n" +
     "    </div>\n" +
     "</div>\n" +
