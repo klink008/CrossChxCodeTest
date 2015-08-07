@@ -36,5 +36,3 @@
 .project
 .classpath
 node_modules
-web-app/js/*.js
-build
