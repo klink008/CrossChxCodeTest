@@ -1,10 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="main"/>
     <Title>ChrossChx</Title>
 </head>
-<body>
+<body class="body">
 <asset:stylesheet src="railroadRouts.css"/>
 <script src="js/dependencies.js"></script>
 <script src="js/railroadRoute.js"></script>

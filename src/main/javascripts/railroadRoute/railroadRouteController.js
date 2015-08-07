@@ -10,15 +10,15 @@ function RailroadRouteController($scope, railroadRouteService, $q){
     this.initialize = function(){
         retrieveRouteNodes().then(function(nodeResponse){
             retrieveRouteLinks().then(function(linkResponse){
-                var nodes = [];
-                var links = [];
+                _this.nodes = [];
+                _this.links = [];
                 _.each(nodeResponse, function(node){
-                    nodes.push({name: node.name, group: node.group})
+                    _this.nodes.push({name: node.name, group: node.group})
                 });
                 _.each(linkResponse, function(link){
-                    links.push({source: link.source, target: link.target, value: link.value})
+                    _this.links.push({source: link.source, target: link.target, value: link.value})
                 });
-                createForceGraph(nodes,links)
+                createForceGraph(_this.nodes,_this.links)
             })
         });
     };
@@ -33,19 +33,21 @@ function RailroadRouteController($scope, railroadRouteService, $q){
     }
 
     function createForceGraph(nodes, links){
-        var width = 960,
-            height = 500;
+        var height = 250,
+            width = 250;
 
-        var color = d3.scale.category20();
+        var color = d3.scale.category20b();
+
+        var svg = d3.select("#force-layout").append("svg:svg")
+            .attr("viewBox", "0 0 " + width + " " + height )
+            .attr("preserveAspectRatio", "xMidYMid meet")
+            .attr("height", "100%")
+            .attr("width", "100%");
 
         var force = d3.layout.force()
             .charge(-120)
             .linkDistance(30)
             .size([width, height]);
-
-        var svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height);
 
         force
             .nodes(nodes)
@@ -96,7 +98,7 @@ function RailroadRouteController($scope, railroadRouteService, $q){
                     return d.y;
                 });
         });
-    }
 
+    }
 }
 railroadRoute.controller('railroadRouteController', RailroadRouteController);

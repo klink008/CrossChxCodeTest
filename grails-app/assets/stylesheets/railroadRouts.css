@@ -7,3 +7,43 @@
     stroke: #999;
     stroke-opacity: .6;
 }
+
+.body{
+    margin: 0;
+    overflow-y: hidden;
+}
+
+.vertical-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-container{
+    display: flex;
+}
+
+.force-layout{
+    flex-grow: 2;
+    height: 100%;
+    width: 100%;
+    background-color: lightblue;
+}
+
+.selection-pane{
+    flex-grow: 1;
+    flex-basis: 25%;
+    background-color: lightcoral;
+}
+
+.header{
+    background-color: peachpuff;
+    height: 50px;
+}
+
+.towns{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 30px;
+}

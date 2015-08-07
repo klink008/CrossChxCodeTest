@@ -30,7 +30,7 @@ gulp.task('test', function(done) {
 });
 
 gulp.task('src-build', function(){
-    return gulp.src(['build/templates.js','src/main/javascripts/*.js'])
+    return gulp.src(['build/templates.js',paths.scripts[0], paths.scripts[1]])
         .pipe(concat('railroadRoute.js'))
         .pipe(gulp.dest(paths.dest[1]));
 });

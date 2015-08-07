@@ -1,4 +1,4 @@
-var RailroadRouteDirective = function($q){
+var RailroadRouteDirective = function($window){
     return {
         restrict: 'E',
         scope: {
